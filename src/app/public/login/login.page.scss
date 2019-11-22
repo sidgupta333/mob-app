@@ -1,0 +1,25 @@
+ion-content {
+    --background: none;
+    background-image: url('../../../assets/images/bg/bg1.png');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bottom {
+    margin-top: 50vh;
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.flex-vertical {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.center-button {
+    width: 80%;
+    margin-left: 10vw;
+}

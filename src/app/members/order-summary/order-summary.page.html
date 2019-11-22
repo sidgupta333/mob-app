@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/mixers"></ion-back-button>
+        </ion-buttons>
+        <ion-title>ORDER SUMMARY</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="grid-structure">
+        <div *ngFor="let item of orderItems" class="child-structure">
+            <span class="card-header"> {{ (item.NAME.length>16)? (item.NAME | slice:0:16)+'..':(item.NAME) }} </span>
+            <span class="card-header"> ₹ {{item.PRICE}}</span>
+            <span class="card-header" style="color: rgb(251, 55, 55);"> X {{item.count}}</span>
+            <span class="card-header final-price"> ₹ {{item.total}} </span>
+        </div>
+
+    </div>
+
+</ion-content>
+
+<ion-footer class="bar-stable ion-text-center">
+
+    <div class="grid2">
+        <div class="child1">
+            <span>
+                <span class="amount-text" style="color: #fff;">TABLE</span>
+            </span>
+
+            <span>
+                <p style="color: #fff;" class="amount-text" style="margin-top: 0;">
+                    {{tableNumber}}</p>
+            </span>
+        </div>
+        <div class="child2">
+            <span class="total-amount">Total Amount</span>
+            <span class="sub1"> ₹ {{total}}</span>
+            <p style="margin-top: 0;" class="sub2"> + Taxes Applicable</p>
+        </div>
+    </div>
+    <p class="notification"> Order Quick! Prices @ Ministry of Bar exchange based on demand and supply.</p>
+    <ion-button color="tertiary" class="summary-footer" (click)="confirm()" expand="full">CONFIRM</ion-button>
+
+
+</ion-footer>

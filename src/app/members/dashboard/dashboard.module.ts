@@ -1,0 +1,32 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+
+import { IonicModule } from '@ionic/angular';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
+import { DashboardPage } from './dashboard.page';
+import { ModalComponent } from '../modal/modal.component';
+
+
+const routes: Routes = [
+  {
+    path: '',
+    component: DashboardPage
+  }
+];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes)
+  ],
+  declarations: [DashboardPage, ModalComponent],
+  entryComponents: [ModalComponent]
+})
+export class DashboardPageModule {}

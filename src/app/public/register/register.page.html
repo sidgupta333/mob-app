@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/login"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Register</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+        <ion-card>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label position="floating">Name</ion-label>
+                    <ion-input type="text" formControlName="name"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Email Address</ion-label>
+                    <ion-input type="text" formControlName="email"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" (change)="passwordChanged()" formControlName="password"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Confirm Password</ion-label>
+                    <ion-input type="password" (change)="passwordChanged()" formControlName="cPassword"></ion-input>
+                </ion-item>
+
+            </ion-card-content>
+            <div *ngIf="isInvalid">
+                <p style="color: red;">
+                    Password and Confirm password should be same.
+                </p>
+            </div>
+        </ion-card>
+        <ion-button class="btn-standard" type="submit" color="primary" expand="block" [disabled]="!registerForm.valid">Register
+        </ion-button>
+        <ion-button class="btn-standard" (click)="clearForm()" color="tertiary" expand="block">Clear
+        </ion-button>
+
+
+    </form>
+
+</ion-content>

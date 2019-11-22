@@ -1,0 +1,99 @@
+.grid-structure {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    width: 92%;
+    margin: 4% 2vh;
+}
+
+.child-structure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 19vh;
+    width: auto;
+    margin: 0.5vh;
+    background-color: #1b1b1b;
+}
+
+.card-header {
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2vh;
+}
+
+.final-price {
+    width: 100%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-top: 1px solid rgb(10, 10, 10);
+    ;
+    font-size: 16px;
+    text-align: center;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    width: 92%;
+    margin-left: 2vh;
+}
+
+.child1 {
+    width: auto;
+    background-color: #1b1b1b;
+    height: 15vh;
+    margin-right: 0.5vh;
+    padding-top: 5vh;
+}
+
+.child2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    background-color: #1b1b1b;
+    height: 15vh;
+    margin-left: 0.5vh;
+}
+
+.amount-text {
+    color: rgb(53, 173, 243);
+    font-size: 16px;
+}
+
+.total-amount {
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    color: #fff;
+    font-size: 15px;
+    width: 100%;
+    border-bottom: solid 1px rgb(10, 10, 10);
+    ;
+}
+
+.sub1 {
+    margin-top: 5px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.sub2 {
+    color: #fff;
+    font-size: 9px;
+}
+
+.summary-footer {
+    width: 100%;
+    height: 8vh;
+    background-color: #1b1b1b;
+    color: rgb(53, 173, 243);
+    font-size: 18px;
+}
+
+.notification {
+    font-size: 9px;
+    color: #fff;
+}

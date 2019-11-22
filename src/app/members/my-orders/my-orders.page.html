@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>MY ORDERS</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="margin-bottom: 2vh;">
+
+    <div *ngFor="let order of orders" class="order-block">
+
+        <div class="ion-text-center">
+            <h4 *ngIf="order.orderId" style="font-weight: bolder;">ORDER ID: <span>{{order.orderId}}</span> </h4>
+
+            <h4 *ngIf="!order.orderId" style="font-weight: bolder;"><span style="color: green;"> ORDER IN PROGRESS </span></h4>
+        </div>
+        <div class="ion-text-center div-outlet">
+            <span style="font-size: 14px; color: rgb(189, 189, 189);"> Outlet: {{order.outlet}} </span>
+        </div>
+        <div class="div-items">
+            <p class="item-head"> Name: </p>
+            <p class="item-value"> {{name}} </p>
+        </div>
+
+        <div class="div-items">
+            <p class="item-head"> Order Date: </p>
+            <p class="item-value"> {{order.orderDate}} </p>
+        </div>
+
+        <div class="div-items">
+            <p class="item-head"> Items: </p>
+            <p class="item-value ion-text-wrap" style="padding-bottom: 2vh; border-bottom: 1px solid white;">
+                {{order.orders}} </p>
+        </div>
+
+        <div class="ion-text-center" style="padding-bottom: 1vh;">
+            <h5> <span style="color: rgb(189, 189, 189);">Total Amount: </span> <span style="font-weight: bolder;"> ₹
+                    {{order.finalPrice}}</span> </h5>
+        </div>
+    </div>
+</ion-content>

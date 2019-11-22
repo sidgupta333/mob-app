@@ -1,0 +1,76 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title><span style="float: left; width: 80%; text-align: left;">MOB</span>
+        </ion-title>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <h3 *ngIf="drinksData.length == 0 else showData" style="color: grey; text-align: center;"> NO DATA TO DISPLAY
+    </h3>
+
+    <ng-template #showData>
+
+        <div (click)="navigateToNotif()" class="news-head">
+
+            <div style="margin-bottom: -5px;" class="ion-text-center">
+                <h5 style="font-weight: bolder;"> {{ notif.desc1 }} </h5>
+            </div>
+            <div class="ion-text-center">
+                <span>{{ (notif.desc2.length>16)? (notif.desc2 | slice:0:16)+'..':(notif.desc2) }}</span>
+            </div>
+
+        </div>
+        <div *ngFor="let item of drinksData" class="parent-container">
+            <div class="container1">
+                <div class="static-card-ionic ion-text-center">
+                    <div>
+                        {{item.NAME}}
+                    </div><br>
+                    <div>
+                        <img class="img-padding" [src]="item.IMAGE_PATH"> </div>
+                </div>
+            </div>
+            <div class="scrolling-wrapper">
+                <div *ngFor="let item2 of item.drinks" class="card-ionic ion-text-center ion-text-wrap">
+                    <ion-label class="label-text">{{item2.NAME}}</ion-label>
+                    <div class="flex-row">
+                        <div class="flex-column">
+                            <ion-icon style="color: rgb(15, 236, 81);" name="ios-arrow-up"></ion-icon>
+                            <p class="min-price"> {{item2.MIN_PRICE}}</p>
+                        </div>
+                        <div class="flex-column">
+                            <ion-icon style="color: rgb(251, 55, 55);" name="ios-arrow-down"></ion-icon>
+                            <p class="max-price"> {{item2.MAX_PRICE}}</p>
+                        </div>
+                    </div>
+                    <ion-footer>
+
+                        <div (click)="showQuantityModal(item2)" class="price-link" [ngClass]="{'bg-green': item2.increaseFlag, 'bg-red': !item2.increaseFlag}">
+                            <span> {{item2.PRESENT_PRICE}} &nbsp;
+                                <ion-icon *ngIf="item2.increaseFlag" style="color: #fff;" name="ios-arrow-up">
+                                </ion-icon>
+                                <ion-icon *ngIf="!item2.increaseFlag" style="color: #fff;" name="ios-arrow-down">
+                                </ion-icon>
+                            </span>
+                        </div>
+                    </ion-footer>
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </ng-template>
+
+
+
+</ion-content>

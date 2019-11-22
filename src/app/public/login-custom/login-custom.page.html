@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-buttons slot="start">
+            <ion-back-button routerLink="/login"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <ion-card>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label position="floating">Email Address</ion-label>
+                    <ion-input type="text" formControlName="email"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" formControlName="password"></ion-input>
+                </ion-item>
+
+            </ion-card-content>
+        </ion-card>
+        <ion-button class="btn-standard" type="submit" color="tertiary" expand="block" [disabled]="!loginForm.valid">Login</ion-button>
+
+
+    </form>
+
+</ion-content>

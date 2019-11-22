@@ -1,0 +1,15 @@
+<ion-content padding class="back-img">
+
+    <div class="bottom" text-center>
+        <div class="flex-vertical">
+            <img src="assets/images/facebook.png" class="center-button" style="width : 80% ; height : 6vh; border-radius: 5px; margin-bottom: 1vh;" (click)="loginFb()">
+            <img src="assets/images/google.png" class="center-button" style="width : 80% ; height : 6vh; border-radius: 5px; margin-bottom: 0.5vh;" (click)="loginGoogle()">
+            <ion-button class="center-button white-text" expand="block" color="tertiary" routerLink="/register" routerDirection="forward" style="height: 6vh; font-size: 2.2vh;">Sign Up with Email</ion-button>
+        </div><br>
+        <div style="float:right;">
+            <span style="margin-right: 10vw" class="white-text">  Already have account? <b>
+              <a routerLink="/login-custom">Sign In</a></b></span>
+        </div>
+    </div>
+
+</ion-content>

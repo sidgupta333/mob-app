@@ -1,0 +1,63 @@
+<ion-menu side="start" type="overlay" contentid="content">
+    <ion-header>
+        <div class="menu-header">
+            <span>
+                <ion-avatar style="margin-left: 5vw;">
+                    <img *ngIf="!imageUrl" src="assets/images/user.png">
+                    <img *ngIf="imageUrl" [src]="imageUrl">
+
+                </ion-avatar>
+            </span>
+            <span class="menu-text">
+                {{name}}
+            </span>
+        </div>
+
+    </ion-header>
+
+    <ion-content>
+        <ion-list>
+            <ion-menu-toggle auto-hide="true">
+                <ion-item (click)="navigateToHome()" routerDirection="root">
+                    <ion-icon name="home" color="light"></ion-icon>
+                    <span class="menu-item"> Home</span>
+                </ion-item>
+                <ion-item (click)="navigateOrdersList()" routerDirection="root">
+                    <ion-icon name="paper" color="light"></ion-icon>
+                    <span class="menu-item"> My Orders</span>
+                </ion-item>
+                <ion-item (click)="navigateToAbout()" routerDirection="root">
+                    <ion-icon name="phone-landscape" color="light"></ion-icon>
+                    <span class="menu-item"> About Developers</span>
+                </ion-item>
+                <!-- <ion-item [routerLink]="dashboard" routerDirection="root">
+                    <ion-icon name="help-circle-outline" color="light"></ion-icon>
+                    <span class="menu-item"> Help</span>
+                </ion-item>
+                <ion-item [routerLink]="dashboard" routerDirection="root">
+                    <ion-icon name="star-outline" color="light"></ion-icon>
+                    <span class="menu-item"> Rate this App </span>
+                </ion-item>
+                <ion-item [routerLink]="dashboard" routerDirection="root">
+                    <ion-icon name="checkbox-outline" color="light"></ion-icon>
+                    <span class="menu-item"> Terms and Conditions </span>
+                </ion-item>
+                <ion-item [routerLink]="dashboard" routerDirection="root">
+                    <ion-icon name="information-circle-outline" color="light"></ion-icon>
+                    <span class="menu-item"> About Us </span>
+                </ion-item> -->
+
+
+            </ion-menu-toggle>
+        </ion-list>
+    </ion-content>
+
+    <ion-footer class="bar-stable">
+        <ion-item menu-close (click)="logout()">Logout
+        </ion-item>
+
+
+    </ion-footer>
+</ion-menu>
+
+<ion-router-outlet id="content" main></ion-router-outlet>
