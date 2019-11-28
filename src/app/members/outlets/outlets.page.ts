@@ -36,14 +36,14 @@ export class OutletsPage implements OnInit {
         this.storage.get("social").then((res2: any) => {
 
           if (res2 == 'facebook') {
-            id = user.id;
+            id = user.email;
           }
           else if (res2 == 'google') {
-            id = user.userId;
+            id = user.email;
           }
 
           else {
-            id = user[0]._id;
+            id = user[0].EMAIL;
           }
 
           this.http.getTableStatus(id).subscribe((res: any) => {
