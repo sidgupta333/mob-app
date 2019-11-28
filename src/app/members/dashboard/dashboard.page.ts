@@ -18,7 +18,7 @@ export class DashboardPage implements OnInit {
   drinksData: any[] = [];
   serverPath: string = null;
   quantities: number;
-  notif: object = {
+  notif = {
     _id: null,
     desc1: null,
     desc2: null

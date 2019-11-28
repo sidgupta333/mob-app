@@ -8,7 +8,10 @@ import { Storage } from '@ionic/storage';
 })
 export class NotifPage implements OnInit {
 
-  notif: object = {};
+  notif = {
+    desc1: null,
+    desc2: null
+  };
 
   constructor(private storage: Storage) { }
 
