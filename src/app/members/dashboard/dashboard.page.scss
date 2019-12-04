@@ -1,4 +1,5 @@
 .card-ionic {
+    border-radius: 5px;
     flex: 0 0 auto;
     width: 22vw;
     height: 20vh;
@@ -78,7 +79,8 @@
     margin-top: 2vh;
     padding: 10px;
     color: #fff;
-    width: 100%
+    width: 100%;
+    border-radius: 0 0 5px 5px;
 }
 
 .bg-green {
