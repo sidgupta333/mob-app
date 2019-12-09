@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { OrderSummaryPage } from './order-summary.page';
+import { TableModalComponent } from 'src/app/modals/table-modal/table-modal.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [OrderSummaryPage],
-  entryComponents: []
+  declarations: [OrderSummaryPage, TableModalComponent],
+  entryComponents: [TableModalComponent]
 })
 export class OrderSummaryPageModule {}

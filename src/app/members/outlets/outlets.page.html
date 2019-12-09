@@ -9,13 +9,3 @@
     <ion-button *ngFor="let item of outlets" class="btn-standard outlet-btn" (click)="selectOutlet(item)" color="tertiary" expand="full"> {{ item.OUTLET_NAME}}
     </ion-button>
 </ion-content>
-
-
-<ion-footer style="background-color: #1b1b1b;" class="bar-stable ion-text-center">
-    <h5 style="color: white;"> STATUS:
-        <span *ngIf="tableAlloted == 2" style="color: green;"> TABLE CONFIRMED: {{tableNumber}} </span>
-        <span *ngIf="tableAlloted == 1" style="color: yellow"> YOU ARE IN QUEUE </span>
-        <span *ngIf="tableAlloted == 0" style="color: red"> TABLE NOT ALLOTED </span>
-    </h5>
-
-</ion-footer>

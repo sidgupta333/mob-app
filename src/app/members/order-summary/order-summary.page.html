@@ -24,13 +24,17 @@
 <ion-footer class="bar-stable ion-text-center">
 
     <div class="grid2">
-        <div class="child1">
-            <span>
-                <span class="amount-text" style="color: #fff;">TABLE</span>
+        <div (click)="showTableModal()" class="child1">
+            <span *ngIf="!tableNumber">
+                <span class="amount-text" style="color: #fff;">SELECT TABLE</span>
             </span>
 
-            <span>
-                <p style="color: #fff;" class="amount-text" style="margin-top: 0;">
+            <span *ngIf="tableNumber">
+                <span class="amount-text" style="color: rgb(74, 172, 185);">TABLE</span>
+            </span>
+
+            <span *ngIf="tableNumber">
+                <p style="color: rgb(74, 172, 185);" class="amount-text" style="margin-top: 0;">
                     {{tableNumber}}</p>
             </span>
         </div>
@@ -41,7 +45,7 @@
         </div>
     </div>
     <p class="notification"> Order Quick! Prices @ Ministry of Bar exchange based on demand and supply.</p>
-    <ion-button color="tertiary" class="summary-footer" (click)="confirm()" expand="full">CONFIRM</ion-button>
+    <ion-button [disabled]="tableNumber == null" color="tertiary" class="summary-footer" (click)="confirm()" expand="full">CONFIRM</ion-button>
 
 
 </ion-footer>

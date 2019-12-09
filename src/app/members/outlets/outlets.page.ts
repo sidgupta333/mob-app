@@ -45,47 +45,6 @@ export class OutletsPage implements OnInit {
           else {
             id = user[0].EMAIL;
           }
-
-          this.http.getTableStatus(id).subscribe((res: any) => {
-            if (res.message == 'No Data') {
-              this.tableAlloted = 0;
-            }
-            else if (res.message == 'Waiting') {
-              this.tableAlloted = 1;
-            }
-
-            else {
-              this.tableAlloted = 2;
-              this.tableNumber = res[0].TABLE_NUMBER;
-              this.outletId = res[0].OUTLET_ID;
-            }
-          })
-
-
-          // Fetch the status of table number
-          this.outletinterval = window.setInterval(() => {
-
-            this.http.getTableStatus(id).subscribe((res: any) => {
-              if (res.message == 'No Data') {
-                this.tableAlloted = 0;
-              }
-              else if (res.message == 'Waiting') {
-                this.tableAlloted = 1;
-              }
-
-              else {
-                this.tableAlloted = 2;
-                this.tableNumber = res[0].TABLE_NUMBER;
-                this.outletId = res[0].OUTLET_ID;
-              }
-            },
-            err => {
-              this.tableAlloted = 0;
-            })
-
-          }, 5000);
-
-
         });
       });
     });
@@ -120,38 +79,12 @@ export class OutletsPage implements OnInit {
   }
 
 
-
   selectOutlet(outlet: any) {
 
-    if (this.tableAlloted == 0) {
-      this.dialogs.alert("You are not yet alloted any table, please reach out to Restuarant personnel.", "PLEASE WAIT");
-    }
-    else if (this.tableAlloted == 1) {
-      this.dialogs.alert("You are in waiting queue, please wait.", "PLEASE WAIT");
-    }
-    else {
-
-      //Check if selected outlet is correct or not:
-
-      if (outlet._id == this.outletId) {
         console.log("Outlet selected: ", outlet);
         this.storage.set("outlet", outlet);
-        window.clearInterval(this.outletinterval);
         
         //Save table number:
-        this.storage.set("table", this.tableNumber);
         this.router.navigate(['members', 'menu', 'dashboard']);
-
-      }
-
-      else {
-        this.dialogs.alert("Please select outlet in which your seat is booked.", "ERROR");
-
-      }
-
-    }
   }
-
-
-
 }

@@ -1,0 +1,12 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="ion-text-center">{{header}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div *ngFor="let item of quantityList" (click)="selectCount(item)" class="grey-container ion-text-center">
+        {{item.TABLE_NUMBER}} - {{item.TABLE_ADDRESS}}
+    </div>
+</ion-content>

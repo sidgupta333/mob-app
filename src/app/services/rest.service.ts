@@ -19,6 +19,7 @@ export class RestService {
   NOTIF_GET: string = "/notification/getNotificationById/";
   ORDER_LIST: string = "/order/getOrderByEmailID/";
   CHECK_TABLE: string = "/table/getTableByUserId/";
+  GET_ALl_TABLES = "/table/getAllTable";
   
 
   constructor(private http: HttpClient) { }
@@ -81,6 +82,11 @@ export class RestService {
 
   public getTableStatus(id) {
     let url = this.SERVER.concat(this.CHECK_TABLE, id);
+    return this.http.get(url);
+  }
+
+  public getAllTables() {
+    let url = this.SERVER.concat(this.GET_ALl_TABLES);
     return this.http.get(url);
   }
 }

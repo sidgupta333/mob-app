@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { RestService } from 'src/app/services/rest.service';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Router } from '@angular/router';
+import { TableModalComponent } from 'src/app/modals/table-modal/table-modal.component';
 
 @Component({
   selector: 'app-order-summary',
@@ -15,14 +16,15 @@ export class OrderSummaryPage implements OnInit {
 
   orderItems: any[] = [];
   total: number = 0;
-  tableCount: number = 0;
   quantities: number = 0;
   outlet: any = null;
   userId: any = null;
   tableNumber: any = null;
+  allTables: any = [];
 
   constructor(private storage: Storage,
     private http: RestService,
+    private modal: ModalController,
     private dialog: Dialogs,
     private utils: UtilsService,
     private loading: LoadingController,
@@ -36,6 +38,10 @@ export class OrderSummaryPage implements OnInit {
     }).then((loading) => {
 
       loading.present();
+
+      this.http.getAllTables().subscribe((res: any[]) => {
+        this.allTables = res;
+      });
 
       this.http.getQuantities().subscribe((res: any[]) => {
 
@@ -58,7 +64,7 @@ export class OrderSummaryPage implements OnInit {
         //Map a new response received by modal:
         this.storage.ready().then(() => {
           this.storage.get('TCount').then((res: any) => {
-            this.tableCount = res;
+            this.tableNumber = res.TABLE_NUMBER;
           });
         });
       }
@@ -139,6 +145,23 @@ export class OrderSummaryPage implements OnInit {
   }
 
 
+  // Display table modal:
+  async showTableModal() {
+    const modal = await this.modal.create({
+      component: TableModalComponent,
+      cssClass: 'custom-modal',
+      componentProps: {
+        'header': 'Select Table',
+        'count': this.quantities,
+        'type': 'T',
+        'data': this.allTables
+      }
+    });
+
+    modal.present();
+  }
+
+
   // Confirm order selected
   confirm() {
 
@@ -149,7 +172,7 @@ export class OrderSummaryPage implements OnInit {
       PROD_ID: this.orderItems[0].id,
       PRICE: this.orderItems[0].PRICE,
       PROD_QUAN: this.orderItems[0].count,
-      TABLE_ID: this.tableCount,
+      TABLE_ID: this.tableNumber,
       OUTLET_ID: this.outlet._id,
       MIXER: []
     };
