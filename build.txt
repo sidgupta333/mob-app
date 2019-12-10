@@ -1,0 +1,5 @@
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore E:\EGAL\Projects\MOB\mobile-app\mob-app\mob-app.keystore app-release-unsigned.apk mob-app
+
+
+
+zipalign -v 4 app-release-unsigned.apk mob.apk
