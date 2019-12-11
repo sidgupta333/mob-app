@@ -57,6 +57,10 @@ export class OrderSummaryPage implements OnInit {
     });
 
 
+     this.storage.ready().then(() => {
+       this.storage.set('TCount', null);
+     });   
+
     // Listen to emitter value of modal:
     this.utils.tableEmitter.subscribe((res) => {
       if (res) {
@@ -112,11 +116,7 @@ export class OrderSummaryPage implements OnInit {
           this.outlet = res;
         }));
 
-        //Get table details:
-        this.storage.get("table").then((res => {
-          this.tableNumber = res;
-        }));
-
+       
         //Get user details:
         this.storage.get("social").then((res: any) => {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { Storage } from '@ionic/storage';
@@ -19,6 +19,16 @@ export class OutletsPage implements OnInit {
   tableNumber: any = null;
   outletId: any = null;
   outletinterval: any;
+
+   @HostListener('document:ionBackButton', ['$event'])
+  overrideHardwareBackAction(event: any) {
+    console.log('back button');
+    event.detail.register(100, async () => {
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+      event.preventDefault();
+    });
+  }
 
   constructor(private http: RestService,
     private dialogs: Dialogs,
