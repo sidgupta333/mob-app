@@ -123,19 +123,19 @@ export class OrderSummaryPage implements OnInit {
           if (res == 'facebook') {
             this.storage.get("data").then((res2: any) => {
               console.log("USER++> ", res2);
-              this.userId = res2.id;
+              this.userId = res2.email;
             });
           }
           else if (res == 'google') {
             this.storage.get("data").then((res2: any) => {
               console.log("USER++> ", res2);
-              this.userId = res2.userId;
+              this.userId = res2.email;
             });
           }
           else {
             this.storage.get("data").then((res2: any) => {
               console.log("USER++> ", res2);
-              this.userId = res2[0]._id;
+              this.userId = res2[0].EMAIL;
             });
           }
         })

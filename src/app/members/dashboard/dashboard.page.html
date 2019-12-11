@@ -52,7 +52,8 @@
                     <ion-footer>
 
                         <div (click)="showQuantityModal(item2)" class="price-link" [ngClass]="{'bg-green': item2.increaseFlag, 'bg-red': !item2.increaseFlag}">
-                            <span> {{item2.PRESENT_PRICE}} &nbsp;
+
+                            <span style="margin-top:10px;"> {{item2.PRESENT_PRICE}} &nbsp;
                                 <ion-icon *ngIf="item2.increaseFlag" style="color: #fff;" name="ios-arrow-up">
                                 </ion-icon>
                                 <ion-icon *ngIf="!item2.increaseFlag" style="color: #fff;" name="ios-arrow-down">
