@@ -38,16 +38,16 @@ export class MyOrdersPage implements OnInit {
           this.storage.get("social").then((res2: any) => {
 
             if (res2 == 'facebook') {
-              id = user.id;
+              id = user.email;
               this.name = user.name;
             }
             else if (res2 == 'google') {
-              id = user.userId;
+              id = user.email;
               this.name = user.displayName;
             }
 
             else {
-              id = user[0]._id;
+              id = user[0].EMAIL;
               this.name = user[0].NAME;
             }
 
@@ -77,7 +77,7 @@ export class MyOrdersPage implements OnInit {
 
                     order.forEach(element => {
 
-                      price += element.TOTAL_PRICE_AFTER_TAX;
+                      price += element.TOTAL_PRICE;
                       orderString = orderString.concat(element.PROD_QUAN.toString(), " X ", element.PRODUCT_NAME, ", ");
 
                       let mixerPrice = 0;
