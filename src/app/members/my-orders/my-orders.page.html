@@ -12,9 +12,9 @@
     <div *ngFor="let order of orders" class="order-block">
 
         <div class="ion-text-center">
-            <h4 *ngIf="order.orderId" style="font-weight: bolder;">ORDER ID: <span>{{order.orderId}}</span> </h4>
+            <h4 *ngIf="order.orderId" style="font-weight: bolder; color: rgb(145, 235, 11);">ORDER COMPLETED </h4>
 
-            <h4 *ngIf="!order.orderId" style="font-weight: bolder;"><span style="color: green;"> ORDER IN PROGRESS </span></h4>
+            <h4 *ngIf="!order.orderId" style="font-weight: bolder;"><span style="color: yellow;"> ORDER IN PROGRESS </span></h4>
         </div>
         <div class="ion-text-center div-outlet">
             <span style="font-size: 14px; color: rgb(189, 189, 189);"> Outlet: {{order.outlet}} </span>
@@ -40,4 +40,11 @@
                     {{order.finalPrice}}</span> </h5>
         </div>
     </div>
+
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Loading data...">
+        </ion-refresher-content>
+    </ion-refresher>
+
 </ion-content>

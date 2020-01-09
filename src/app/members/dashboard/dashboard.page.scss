@@ -1,10 +1,10 @@
 .card-ionic {
     border-radius: 5px;
     flex: 0 0 auto;
-    width: 25vw;
-    height: 22vh;
+    width: 102px;
+    height: 155px;
     background-color: #1b1b1b;
-    margin-left: 2vw;
+    margin-left: 8px;
     border-radius: 5px;
     padding-top: 5px;
      ::-webkit-scrollbar {
@@ -14,9 +14,9 @@
 
 .parent-container {
     display: grid;
-    grid-template-columns: 26% 74%;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
+    grid-template-columns: 114px auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .container1 {
@@ -25,9 +25,9 @@
 
 .static-card-ionic {
     display: inline-block;
-    width: 25vw;
+    width: 102px;
     padding-top: 5px;
-    height: 22vh;
+    height: 155px;
     background-color: #1b1b1b;
     border-radius: 5px;
 }
@@ -43,7 +43,7 @@
 
 .label-text {
     display: block;
-    height: 8vh;
+    height: 58px;
 }
 
 .flex-column {
@@ -73,9 +73,9 @@
 }
 
 .price-link {
-    width: 25vw;
-    height: 6vh;
-    margin-top: 3vh;
+    width: 83px;
+    height: 40px;
+    margin-top: 22px;
     padding: 10px;
     color: #fff;
     width: 100%;
@@ -93,6 +93,8 @@
 .img-padding {
     padding-left: 5px;
     padding-right: 5px;
+    max-height: 102px;
+    max-width: 72px;
 }
 
 .news-head {
@@ -102,4 +104,22 @@
     margin-top: 1vh;
     background-color: #1b1b1b;
     height: 7vh;
+}
+
+@media(max-height: 600px) {
+    .news-head {
+        height: 12vh;
+    }
+    .current-price {
+        margin-top: -3px;
+    }
+}
+
+@media(max-height: 400px) {
+    .news-head {
+        height: 15vh;
+    }
+    .current-price {
+        margin-top: -7px;
+    }
 }

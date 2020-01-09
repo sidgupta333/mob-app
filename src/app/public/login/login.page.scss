@@ -23,3 +23,13 @@ ion-content {
     width: 80%;
     margin-left: 10vw;
 }
+
+.grid-display {
+    display: grid;
+    grid-auto-rows: 20% 80%;
+}
+
+.icon-style {
+    margin-top: 10px;
+    margin-left: 20px;
+}

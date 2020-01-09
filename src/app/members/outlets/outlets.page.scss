@@ -4,3 +4,10 @@
     width: 100vw;
     height: 7vh;
 }
+
+@media(min-height: 1000px) {
+    .outlet-btn {
+        font-size: 120%;
+        height: 10vh;
+    }
+}

@@ -25,6 +25,12 @@
             </div>
         </div>
     </div>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Loading data...">
+        </ion-refresher-content>
+    </ion-refresher>
+
 </ion-content>
 
 <ion-footer style="background-color: #1b1b1b;" class="bar-stable ion-text-center">

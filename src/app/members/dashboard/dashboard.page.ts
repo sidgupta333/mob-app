@@ -23,6 +23,11 @@ export class DashboardPage implements OnInit {
     desc1: null,
     desc2: null
   };
+  refresherDisabled = false;
+  scrollDetails = {
+    count: 0,
+    up: false
+  };
 
   constructor(private http: RestService,
     private loading: LoadingController,
@@ -81,6 +86,7 @@ export class DashboardPage implements OnInit {
         // Get all the types of drinks from Server
         this.http.getDrinks().subscribe((res2: any) => {
 
+          let tempDrinks = [];
           //Map all the types with corresponding drinks:
           res1.forEach(type => {
 
@@ -102,7 +108,7 @@ export class DashboardPage implements OnInit {
               }
             });
 
-            this.drinksData.push({
+            tempDrinks.push({
               _id: typeId,
               NAME: type.NAME,
               IMAGE_PATH: this.serverPath.concat(type.IMAGE_PATH),
@@ -110,13 +116,15 @@ export class DashboardPage implements OnInit {
             });
           });
 
+          this.drinksData = tempDrinks;
+
           loading.dismiss();
 
           // Update the price of drinks randomly every 3 seconds
           window.setInterval(() => {
 
             this.updateLivePrice();
-          }, 1000);
+          }, 1500);
 
         },
           err => {
@@ -151,7 +159,7 @@ export class DashboardPage implements OnInit {
 
           drink.PRESENT_PRICE = newPrice;
 
-        }, drink.changeInterval * 1000)
+        }, drink.changeInterval * 2000)
 
       });
     });
@@ -187,6 +195,13 @@ export class DashboardPage implements OnInit {
   //Navigate to notif:
   navigateToNotif() {
     this.router.navigate(['members', 'notif']);
+  }
+
+  doRefresh(event) {
+    this.serverPath = null;
+    this.quantities = 0;
+    this.ngOnInit();
+    event.target.complete();
   }
 
 }

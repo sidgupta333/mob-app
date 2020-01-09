@@ -18,6 +18,7 @@ export class AppComponent {
 
   orderTime: number = 10;
   intervalId: any;
+  pageAddress: any = null;
 
   constructor(
     private platform: Platform,
@@ -35,6 +36,13 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.platform.backButton.subscribe(() => {
+        
+        this.pageAddress = this.utils.getPageAddress();
+        if(this.pageAddress == 'Outlets') {
+          navigator['app'].exitApp();
+        }
+      })
     });
 
 

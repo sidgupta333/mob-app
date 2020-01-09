@@ -9,6 +9,7 @@ export class UtilsService {
 
   mixerEmitter = new BehaviorSubject(false);
   tableEmitter = new BehaviorSubject(false);
+  pageAddress: any = null;
  
   constructor() {
 
@@ -21,6 +22,14 @@ export class UtilsService {
 
   emitTable() {
     this.tableEmitter.next(true);
+  }
+
+  getPageAddress() {
+    return this.pageAddress;
+  }
+
+  setPageAddress(page) {
+    this.pageAddress = page;
   }
 
 }

@@ -9,9 +9,16 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [scrollEvents]="true">
 
-    <h3 *ngIf="drinksData.length == 0 else showData" style="color: grey; text-align: center;"> NO DATA TO DISPLAY
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Loading data...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+
+
+    <h3 *ngIf="drinksData.length == 0 else showData" style="color: grey; text-align: center;">
     </h3>
 
     <ng-template #showData>
@@ -19,17 +26,17 @@
         <div (click)="navigateToNotif()" class="news-head">
 
             <div style="margin-bottom: -5px;" class="ion-text-center">
-                <h5 style="font-weight: bolder;"> {{ notif.desc1 }} </h5>
+                <h5 style="font-weight: bolder;" class="notif-head"> {{ notif.desc1 }} </h5>
             </div>
             <div class="ion-text-center">
-                <span>{{ (notif.desc2.length>16)? (notif.desc2 | slice:0:16)+'..':(notif.desc2) }}</span>
+                <span class="notif2-head">{{ (notif.desc2.length>16)? (notif.desc2 | slice:0:16)+'..':(notif.desc2) }}</span>
             </div>
 
         </div>
         <div *ngFor="let item of drinksData" class="parent-container">
             <div class="container1">
                 <div class="static-card-ionic ion-text-center">
-                    <div>
+                    <div class="static-text">
                         {{item.NAME}}
                     </div><br>
                     <div>
@@ -51,9 +58,9 @@
                     </div>
                     <ion-footer>
 
-                        <div (click)="showQuantityModal(item2)" class="price-link" [ngClass]="{'bg-green': item2.increaseFlag, 'bg-red': !item2.increaseFlag}">
+                        <div (click)="showQuantityModal(item2)" class="price-link flex-column" [ngClass]="{'bg-green': item2.increaseFlag, 'bg-red': !item2.increaseFlag}">
 
-                            <span style="margin-top:10px;"> {{item2.PRESENT_PRICE}} &nbsp;
+                            <span class="current-price"> {{item2.PRESENT_PRICE}} &nbsp;
                                 <ion-icon *ngIf="item2.increaseFlag" style="color: #fff;" name="ios-arrow-up">
                                 </ion-icon>
                                 <ion-icon *ngIf="!item2.increaseFlag" style="color: #fff;" name="ios-arrow-down">
@@ -71,6 +78,7 @@
             </div>
         </div>
     </ng-template>
+
 
 
 

@@ -138,4 +138,16 @@ export class MyOrdersPage implements OnInit {
     return outletName;
   }
 
+
+  doRefresh(event) {
+
+    this.outlets = [];
+    this.orders = [];
+    this.mixers = [];
+    this.name = null;
+
+    this.ngOnInit();
+    event.target.complete();
+  }
+
 }

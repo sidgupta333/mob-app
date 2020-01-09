@@ -1,10 +1,11 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { LoadingController, Platform } from '@ionic/angular';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 
 import { RestService } from 'src/app/services/rest.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
@@ -19,24 +20,22 @@ export class OutletsPage implements OnInit {
   tableNumber: any = null;
   outletId: any = null;
   outletinterval: any;
+  platform: Platform
+  backButtonSubscription: any;
 
-   @HostListener('document:ionBackButton', ['$event'])
-  overrideHardwareBackAction(event: any) {
-    console.log('back button');
-    event.detail.register(100, async () => {
-      event.stopImmediatePropagation();
-      event.stopPropagation();
-      event.preventDefault();
-    });
-  }
 
   constructor(private http: RestService,
     private dialogs: Dialogs,
     private loading: LoadingController,
     private storage: Storage,
-    private router: Router) { }
+    private router: Router,
+    private utils: UtilsService) {
+
+  }
 
   ngOnInit() {
+
+    this.utils.setPageAddress("Outlets");
 
     this.storage.ready().then(() => {
 
@@ -59,6 +58,8 @@ export class OutletsPage implements OnInit {
       });
     });
 
+
+
     //Get outlet lists from Server:
     this.loading.create({
       message: 'Getting outlets list',
@@ -74,6 +75,7 @@ export class OutletsPage implements OnInit {
 
         err => {
           loading.dismiss();
+
           this.dialogs.alert("Unable to connect to server, please check your connection.", "Connection failed");
         });
     });
@@ -91,10 +93,29 @@ export class OutletsPage implements OnInit {
 
   selectOutlet(outlet: any) {
 
-        console.log("Outlet selected: ", outlet);
-        this.storage.set("outlet", outlet);
-        
-        //Save table number:
-        this.router.navigate(['members', 'menu', 'dashboard']);
+    if (outlet.STATUS) {
+      console.log("Outlet selected: ", outlet);
+      this.storage.set("outlet", outlet);
+      this.utils.setPageAddress(null);
+
+      this.router.navigate(['members', 'menu', 'dashboard']);
+
+    }
+
+    else {
+      this.dialogs.alert("You are not located in this city.", "INVALID");
+    }
+
+  }
+
+
+
+  doRefresh(event) {
+    this.tableAlloted = 0;
+    this.tableNumber = null;
+    this.outletId = null;
+    this.outletinterval = null;
+    this.ngOnInit();
+    event.target.complete();
   }
 }

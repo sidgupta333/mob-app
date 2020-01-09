@@ -9,7 +9,7 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
 
 /* Core CSS required for Ionic components to work properly */
 
@@ -21,6 +21,13 @@
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
 @import '~@ionic/angular/css/display.css';
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
 
 /* Optional CSS utils that can be commented out */
 
@@ -29,16 +36,18 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import "./theme/variables.scss";
+@import "./theme/fonts.scss";
 .white-text {
     color: white;
 }
 
 html {
-    --ion-font-family: "Source Sans Pro", "Roboto", "Helvetica Neue", sans-serif;
+    --ion-font-family: "Ubuntu", "Ubuntu" !important;
 }
 
 :root {
-    font-family: "Source Sans Pro", "Roboto", "Helvetica Neue", sans-serif
+    font-family: "Ubuntu", "Ubuntu" !important;
 }
 
 .btn-standard {
@@ -49,6 +58,13 @@ html {
 
 body {
     font-size: 14px;
+    font-family: "Ubuntu", "Ubuntu" !important;
+}
+
+:root[mode=md] .cst-font,
+:root[mode=ios] .cst-font {
+    --ion-font-family: 'Ubuntu'!important;
+    font-family: 'Ubuntu' !important;
 }
 
 ::-webkit-scrollbar,

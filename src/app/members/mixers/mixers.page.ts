@@ -51,8 +51,10 @@ export class MixersPage implements OnInit {
       // Get all the mixers type
       this.http.getMixers().subscribe((res: any[]) => {
 
+        let tempMixers = [];
+
         res.forEach(element => {
-          this.mixers.push({
+          tempMixers.push({
             _id: element._id,
             NAME: element.NAME,
             PRICE: element.PRICE,
@@ -61,7 +63,7 @@ export class MixersPage implements OnInit {
           })
         });
 
-
+        this.mixers = tempMixers;
 
         loading.dismiss();
       },
@@ -159,6 +161,11 @@ export class MixersPage implements OnInit {
 
 
 
+  doRefresh(event) {
 
+    this.quantities = 0;
+    this.ngOnInit();
+    event.target.complete();
+  }
 
 }

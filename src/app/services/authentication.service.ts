@@ -2,12 +2,14 @@ import { Platform } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Dialogs } from '@ionic-native/dialogs/ngx';
 
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { HttpClient } from '@angular/common/http';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
+import { RestService } from './rest.service';
 
 const TOKEN_KEY = 'auth-token';
 
@@ -26,6 +28,8 @@ export class AuthenticationService {
   constructor(private storage: Storage,
     private plt: Platform, private fb: Facebook,
     private google: GooglePlus, private http: HttpClient,
+    private rest: RestService,
+    private dialog: Dialogs,
     private fireAuth: AngularFireAuth) {
 
     this.plt.ready().then(() => {
@@ -74,7 +78,7 @@ export class AuthenticationService {
     this.fb.login(['public_profile', 'email'])
 
       .then((res: FacebookLoginResponse) => {
-          console.log("Succes: ", res);
+        console.log("Succes: ", res);
         if (res.status == 'connected') {
 
           this.userID = res.authResponse.userID;
@@ -109,15 +113,33 @@ export class AuthenticationService {
       console.log("Firebase response --> ", response);
     })
 
-    this.http.get(url).subscribe(data => {
+    this.http.get(url).subscribe((data: any) => {
 
       console.log("FB data --> ", data);
 
-      // Store details in the storage received from facebook
-      this.storage.set("token", access_token);
-      this.storage.set("data", data);
-      this.storage.set("social", "facebook");
-      this.authenticationState.next(true);
+
+      let dto = {
+        NAME: data.name,
+        EMAIL: data.email,
+        USER_ID: null,
+        USER_TYPE: 'USER',
+        SOURCE: 'F',
+        PASSWORD: 'default'
+      };
+
+      this.rest.registerUser(dto).subscribe((res) => {
+
+        // Store details in the storage received from facebook
+        this.storage.set("token", access_token);
+        this.storage.set("data", data);
+        this.storage.set("social", "facebook");
+        this.authenticationState.next(true);
+
+      },
+        err => {
+          this.dialog.alert("Login failed", "ERROR");
+        });
+
 
     });
 
@@ -129,11 +151,33 @@ export class AuthenticationService {
 
     this.google.login({})
       .then(res => {
-        console.log("Google data --> ", res);
-        this.storage.set("token", res.accessToken);
-        this.storage.set("data", res);
-        this.storage.set("image", res.imageUrl);
-        this.storage.set("social", "google");
+
+        let dto = {
+          NAME: res.displayName,
+          EMAIL: res.email,
+          USER_ID: null,
+          USER_TYPE: 'USER',
+          SOURCE: 'G',
+          PASSWORD: 'default'
+        };
+
+        this.rest.registerUser(dto).subscribe((r) => {
+
+          console.log("Google data --> ", res);
+          this.storage.set("token", res.accessToken);
+          this.storage.set("data", res);
+          this.storage.set("image", res.imageUrl);
+          this.storage.set("social", "google");
+
+          this.authenticationState.next(true);
+
+        },
+          err => {
+            this.dialog.alert("Login failed", "ERROR");
+          });
+
+
+
         this.authenticationState.next(true);
 
       })
