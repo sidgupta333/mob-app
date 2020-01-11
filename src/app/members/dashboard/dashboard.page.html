@@ -9,7 +9,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true">
+<ion-content>
 
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Loading data...">
@@ -20,7 +20,6 @@
 
     <h3 *ngIf="drinksData.length == 0 else showData" style="color: grey; text-align: center;">
     </h3>
-
     <ng-template #showData>
 
         <div (click)="navigateToNotif()" class="news-head">
@@ -33,52 +32,51 @@
             </div>
 
         </div>
-        <div *ngFor="let item of drinksData" class="parent-container">
-            <div class="container1">
-                <div class="static-card-ionic ion-text-center">
-                    <div class="static-text">
-                        {{item.NAME}}
-                    </div><br>
-                    <div>
-                        <img class="img-padding" [src]="item.IMAGE_PATH"> </div>
-                </div>
+        <div *ngFor="let item of drinksData" class="flex-parent">
+            <div class="static-card-ionic ion-text-center">
+                <div class="static-text">
+                    {{item.NAME}}
+                </div><br>
+                <div>
+                    <img class="img-padding" [src]="item.IMAGE_PATH"> </div>
             </div>
-            <div class="scrolling-wrapper">
-                <div *ngFor="let item2 of item.drinks" class="card-ionic ion-text-center ion-text-wrap">
-                    <ion-label class="label-text">{{item2.NAME}}</ion-label>
-                    <div class="flex-row">
-                        <div class="flex-column">
-                            <ion-icon style="color: rgb(15, 236, 81);" name="ios-arrow-up"></ion-icon>
-                            <p class="min-price"> {{item2.MIN_PRICE}}</p>
+            <div class="flex-holder">
+                <div class="flex-child">
+                    <div *ngFor="let item2 of item.drinks" class="card-ionic ion-text-center ion-text-wrap">
+                        <ion-label class="label-text">{{item2.NAME}}</ion-label>
+                        <div class="flex-row">
+                            <div class="flex-column">
+                                <ion-icon style="color: rgb(15, 236, 81);" name="ios-arrow-up"></ion-icon>
+                                <p class="min-price"> {{item2.MIN_PRICE}}</p>
+                            </div>
+                            <div class="flex-column">
+                                <ion-icon style="color: rgb(251, 55, 55);" name="ios-arrow-down"></ion-icon>
+                                <p class="max-price"> {{item2.MAX_PRICE}}</p>
+                            </div>
                         </div>
-                        <div class="flex-column">
-                            <ion-icon style="color: rgb(251, 55, 55);" name="ios-arrow-down"></ion-icon>
-                            <p class="max-price"> {{item2.MAX_PRICE}}</p>
-                        </div>
-                    </div>
-                    <ion-footer>
+                        <ion-footer>
 
-                        <div (click)="showQuantityModal(item2)" class="price-link flex-column" [ngClass]="{'bg-green': item2.increaseFlag, 'bg-red': !item2.increaseFlag}">
+                            <div (click)="showQuantityModal(item2)" class="price-link flex-column" [ngClass]="{'bg-green': item2.increaseFlag, 'bg-red': !item2.increaseFlag}">
 
-                            <span class="current-price"> {{item2.PRESENT_PRICE}} &nbsp;
+                                <span class="current-price"> {{item2.PRESENT_PRICE}} &nbsp;
                                 <ion-icon *ngIf="item2.increaseFlag" style="color: #fff;" name="ios-arrow-up">
                                 </ion-icon>
                                 <ion-icon *ngIf="!item2.increaseFlag" style="color: #fff;" name="ios-arrow-down">
                                 </ion-icon>
                             </span>
-                        </div>
-                    </ion-footer>
+                            </div>
+                        </ion-footer>
 
 
+
+
+                    </div>
 
 
                 </div>
-
-
             </div>
         </div>
     </ng-template>
-
 
 
 

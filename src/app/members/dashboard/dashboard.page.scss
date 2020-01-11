@@ -1,4 +1,6 @@
 .card-ionic {
+    margin: 10px 2px;
+    margin-bottom: 0;
     border-radius: 5px;
     flex: 0 0 auto;
     width: 102px;
@@ -12,33 +14,14 @@
     }
 }
 
-.parent-container {
-    display: grid;
-    grid-template-columns: 114px auto;
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
-.container1 {
-    display: inline-block;
-}
-
 .static-card-ionic {
+    margin-top: 10px;
     display: inline-block;
-    width: 102px;
+    min-width: 102px;
     padding-top: 5px;
     height: 155px;
     background-color: #1b1b1b;
     border-radius: 5px;
-}
-
-.scrolling-wrapper {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-     ::-webkit-scrollbar {
-        display: none;
-    }
 }
 
 .label-text {
@@ -110,16 +93,31 @@
     .news-head {
         height: 12vh;
     }
-    .current-price {
-        margin-top: -3px;
-    }
 }
 
 @media(max-height: 400px) {
     .news-head {
         height: 15vh;
     }
-    .current-price {
-        margin-top: -7px;
+}
+
+.flex-parent {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-child {
+    min-height: 0px;
+    display: flex;
+    flex-direction: row;
+    max-width: 100vw;
+    overflow-x: auto;
+     ::-webkit-scrollbar {
+        display: none;
     }
+    overflow-y: hidden;
+}
+
+.flex-holder {
+    overflow: auto;
 }
